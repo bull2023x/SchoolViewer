@@ -1,9 +1,10 @@
-package com.example.schoolviewer.ui
+package com.yonishik.schoolviewer.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.schoolviewer.data.SchoolRepository
-import com.example.schoolviewer.model.SchoolV2Dto
+import com.yonishik.schoolviewer.data.SchoolRepository
+//import com.yonishik.schoolviewer.model.SchoolV2Dto
+import com.yonishik.schoolviewer.model.SchoolV2Dto
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,37 +30,36 @@ class SchoolListViewModel(
         refresh()
     }
 
-    fun refresh() {
-        viewModelScope.launch {
-            val currentQuery = _uiState.value.query
+fun refresh() {
+    viewModelScope.launch {
+        val currentQuery = _uiState.value.query
+
+        _uiState.value = _uiState.value.copy(
+            isLoading = true,
+            errorMessage = null
+        )
+
+        try {
+            val schools = repository.getSchools()
+            val filtered = filterSchools(schools, currentQuery)
+
+
 
             _uiState.value = _uiState.value.copy(
-                isLoading = true,
+                isLoading = false,
+                schools = schools,
+                filteredSchools = filtered,
+                // dataVersion = version?.dataVersion,
                 errorMessage = null
             )
-
-            try {
-                val version = repository.getVersion()
-                val schools = repository.getSchools()
-
-                val filtered = filterSchools(schools, currentQuery)
-
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    schools = schools,
-                    filteredSchools = filtered,
-                    dataVersion = version.dataVersion,
-                    errorMessage = null
-                )
-            } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    errorMessage = e.message ?: "Unknown error"
-                )
-            }
+        } catch (e: Exception) {
+            _uiState.value = _uiState.value.copy(
+                isLoading = false,
+                errorMessage = e.message ?: "Unknown error"
+            )
         }
     }
-
+}
     fun updateQuery(query: String) {
         val base = _uiState.value.schools
         val filtered = filterSchools(base, query)

@@ -1,19 +1,27 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    // id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
-    namespace = "com.example.schoolviewer"
+    namespace = "com.yonishik.schoolviewer"
     compileSdk = 35
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("release-keystore.jks")
+            storePassword = "yireozna"
+            keyAlias = "schoolviewer"
+            keyPassword = "yireozna"
+        }
+    }
+
     defaultConfig {
-        applicationId = "com.example.schoolviewer"
+        applicationId = "com.yonishik.schoolviewer"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 6
+        versionName = "1.0.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,6 +29,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -40,6 +49,7 @@ android {
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }

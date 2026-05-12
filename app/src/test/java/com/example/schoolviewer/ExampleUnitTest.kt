@@ -1,4 +1,4 @@
-package com.example.schoolviewer
+package com.yonishik.schoolviewer
 
 import org.junit.Test
 

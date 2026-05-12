@@ -1,5 +1,6 @@
-package com.example.schoolviewer.ui
-
+package com.yonishik.schoolviewer.ui
+import com.yonishik.schoolviewer.ui.SchoolDetailScreen
+import com.yonishik.schoolviewer.R
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
@@ -26,25 +27,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.schoolviewer.R
-import com.example.schoolviewer.model.SchoolV2Dto
+//  import com.yonishik.schoolviewer.R
+import com.yonishik.schoolviewer.model.SchoolV2Dto
 
 @Composable
 fun SchoolDetailScreen(school: SchoolV2Dto?) {
     if (school == null) {
         Box(modifier = Modifier.fillMaxSize()) {
-            Image(
-                painter = painterResource(id = R.drawable.forest_bg),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(0x66000000))
-            )
 
             Surface(
                 modifier = Modifier
@@ -65,18 +54,7 @@ fun SchoolDetailScreen(school: SchoolV2Dto?) {
     val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = R.drawable.forest_bg),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0x66000000))
-        )
 
         Column(
             modifier = Modifier
@@ -110,7 +88,8 @@ fun SchoolDetailScreen(school: SchoolV2Dto?) {
                 }
             }
 
-            DetailCard("定員", school.capacity)
+            DetailCard("定員", school.capacity?.toString())
+            // DetailCard("定員", school.capacity)
             DetailCard("試験日", school.examDates)
             DetailCard("試験科目", school.subjects)
             DetailCard("試験科目特記", school.alternateSubjects)

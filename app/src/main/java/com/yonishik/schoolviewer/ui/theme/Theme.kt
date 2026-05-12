@@ -1,4 +1,4 @@
-package com.example.schoolviewer.ui.theme
+package com.yonishik.schoolviewer.ui.theme
 
 import android.app.Activity
 import android.os.Build

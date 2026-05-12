@@ -1,4 +1,6 @@
-package com.example.schoolviewer
+package com.yonishik.schoolviewer
+import com.yonishik.schoolviewer.ui.SchoolDetailScreen
+import com.yonishik.schoolviewer.R
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -41,7 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+// import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -50,13 +52,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.schoolviewer.data.SchoolRepository
-import com.example.schoolviewer.model.SchoolV2Dto
-import com.example.schoolviewer.network.ApiClient
-import com.example.schoolviewer.ui.SchoolDetailScreen
-import com.example.schoolviewer.ui.SchoolListViewModel
-import com.example.schoolviewer.ui.SchoolListViewModelFactory
-import com.example.schoolviewer.ui.theme.SchoolViewerTheme
+import com.yonishik.schoolviewer.data.SchoolRepository
+//import com.yonishik.schoolviewer.model.SchoolV2Dto
+import com.yonishik.schoolviewer.model.SchoolV2Dto
+import com.yonishik.schoolviewer.network.ApiClient
+import com.yonishik.schoolviewer.ui.SchoolDetailScreen
+import com.yonishik.schoolviewer.ui.SchoolListViewModel
+import com.yonishik.schoolviewer.ui.SchoolListViewModelFactory
+import com.yonishik.schoolviewer.ui.theme.SchoolViewerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -146,18 +149,8 @@ fun SchoolListScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = R.drawable.forest_bg),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0x66000000))
-        )
+
 
         Scaffold(
             containerColor = Color.Transparent,
@@ -165,7 +158,7 @@ fun SchoolListScreen(
                 TopAppBar(
                     title = {
                         Text(
-                            text = "School Viewer",
+                            text = "中学受験 英語入試情報",
                             color = Color.White,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -213,13 +206,7 @@ fun SchoolListScreen(
                             singleLine = true
                         )
 
-                        uiState.dataVersion?.let {
-                            Text(
-                                text = "Data Version: $it",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = Color(0xFF2F3A2F)
-                            )
-                        }
+
                     }
                 }
 

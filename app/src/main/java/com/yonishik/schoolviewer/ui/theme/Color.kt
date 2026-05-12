@@ -1,4 +1,4 @@
-package com.example.schoolviewer.ui.theme
+package com.yonishik.schoolviewer.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

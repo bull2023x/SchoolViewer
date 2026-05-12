@@ -1,4 +1,4 @@
-package com.example.schoolviewer.model
+package com.yonishik.schoolviewer.model
 
 data class VersionDto(
     val dataVersion: String,
